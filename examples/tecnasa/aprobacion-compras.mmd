@@ -1,0 +1,13 @@
+flowchart TD
+    A[Solicitud de Compra] --> B{Monto > $5,000?}
+    B -->|Sí| C[Aprobación Gerente]
+    B -->|No| D[Aprobación Supervisor]
+    C --> E{¿Aprobado?}
+    D --> E
+    E -->|Sí| F[Generar Orden de Compra]
+    E -->|No| G[Rechazar Solicitud]
+    F --> H[Enviar a Proveedor]
+    G --> I[Notificar Solicitante]
+    H --> J[Confirmar Recepción]
+    J --> K[Fin del Proceso]
+    I --> K

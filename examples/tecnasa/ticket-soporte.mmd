@@ -1,0 +1,20 @@
+stateDiagram-v2
+    [*] --> Nuevo: Usuario crea ticket
+    
+    Nuevo --> Asignado: Asignar a técnico
+    Asignado --> EnProgreso: Técnico inicia trabajo
+    
+    EnProgreso --> Resuelto: Solución aplicada
+    EnProgreso --> Escalado: Requiere especialista
+    
+    Escalado --> EnProgreso: Especialista asignado
+    
+    Resuelto --> Cerrado: Usuario confirma
+    Resuelto --> EnProgreso: Usuario solicita revisión
+    
+    Cerrado --> [*]
+    
+    note right of Escalado
+        Se escala si el tiempo
+        de resolución > 24h
+    end note

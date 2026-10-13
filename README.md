@@ -16,6 +16,62 @@ Edit, preview and share mermaid charts/diagrams.
 
 You can try out a [live version](https://mermaid.live/).
 
+## Galería de Ejemplos Tecnasa
+
+Este fork incluye una galería de ejemplos de procesos empresariales para el curso de Microsoft Copilot.
+
+### Acceder a los ejemplos
+
+Visita `/ejemplos` o usa el menú principal (icono de hamburguesa) → "Ejemplos Tecnasa"
+
+### Agregar nuevos ejemplos
+
+Los ejemplos se encuentran en la carpeta `examples/tecnasa/`. Para agregar un nuevo ejemplo:
+
+1. Crea un archivo `.mmd` con tu diagrama Mermaid en `examples/tecnasa/`
+2. Actualiza `src/routes/(app)/ejemplos/+page.svelte` para incluirlo en la galería:
+   - Agrega un nuevo objeto en el array `examples` con los campos: `id`, `title`, `description`, `filename`, y `code`
+   - El campo `code` debe contener el contenido completo del diagrama
+
+Ejemplo:
+
+```typescript
+{
+  id: 'mi-proceso',
+  title: 'Mi Proceso',
+  description: 'Descripción del proceso',
+  filename: 'mi-proceso.mmd',
+  code: `flowchart TD
+    A[Inicio] --> B[Fin]`
+}
+```
+
+## Despliegue en Vercel
+
+Este proyecto está configurado para desplegarse en Vercel usando `@sveltejs/adapter-static`.
+
+### Configuración
+
+1. Conecta tu repositorio de GitHub a Vercel
+2. Vercel detectará automáticamente la configuración en `vercel.json`
+3. Las variables de entorno en `.env` desactivan analytics y enlaces externos por defecto
+
+### Variables de entorno en Vercel (opcional)
+
+En la configuración del proyecto en Vercel, puedes agregar:
+
+- `MERMAID_ANALYTICS_URL` - URL de tu instancia de Plausible (vacío por defecto)
+- `MERMAID_DOMAIN` - Tu dominio para analytics
+- `MERMAID_IS_ENABLED_MERMAID_CHART_LINKS` - `false` para desactivar enlaces a Mermaid Chart (recomendado)
+
+### Build local
+
+```sh
+pnpm build
+```
+
+El sitio estático se generará en la carpeta `docs/`
+
 # Contributors are welcome!
 
 If you want to speed up the progress for mermaid-live-editor, join the Discord channel and contact knsv.

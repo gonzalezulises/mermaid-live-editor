@@ -17,7 +17,9 @@
   import MenuIcon from '~icons/material-symbols/menu-rounded';
   import CommunityIcon from '~icons/material-symbols/person-play-outline-rounded';
   import PlaygroundIcon from '~icons/material-symbols/shape-line-outline';
+  import FolderIcon from '~icons/material-symbols/folder-outline-rounded';
   import MermaidChartIcon from './MermaidChartIcon.svelte';
+  import { resolve } from '$app/paths';
 
   interface MenuItem {
     label: string;
@@ -32,8 +34,15 @@
   }
 
   const menuItems: MenuItem[] = $derived([
-    { label: 'New', icon: AddIcon, href: urls.current.new, renderer: menuItem },
-    { label: 'Duplicate', icon: DuplicateIcon, href: window.location.href, renderer: menuItem },
+    { href: urls.current.new, icon: AddIcon, label: 'New', renderer: menuItem },
+    { href: window.location.href, icon: DuplicateIcon, label: 'Duplicate', renderer: menuItem },
+    {
+      href: resolve('/ejemplos', {}),
+      icon: FolderIcon,
+      isSectionEnd: false,
+      label: 'Ejemplos Tecnasa',
+      renderer: internalMenuItem
+    },
     {
       href: urls.current.mermaidChart({ medium: 'main_menu' }).playground,
       icon: PlaygroundIcon,
@@ -43,21 +52,21 @@
       renderer: mcMenuItem
     },
     {
-      label: 'Mermaid.js',
-      icon: MermaidTailIcon,
       href: env.docsUrl,
+      icon: MermaidTailIcon,
+      label: 'Mermaid.js',
       renderer: menuItem
     },
     {
-      label: 'Documentation',
-      icon: BookIcon,
       href: `${env.docsUrl}/intro/`,
+      icon: BookIcon,
+      label: 'Documentation',
       renderer: menuItem
     },
     {
-      label: 'Community',
-      icon: CommunityIcon,
       href: 'https://discord.gg/sKeNQX4Wtj',
+      icon: CommunityIcon,
+      label: 'Community',
       renderer: menuItem
     },
     {
@@ -93,6 +102,20 @@
   <a
     href={options.href}
     target="_blank"
+    onclick={options.onclick}
+    class={cn(
+      'flex items-center justify-start gap-2 border-b-2 p-2 px-3 hover:bg-muted',
+      options.isSectionEnd && 'border-border-dark',
+      options.class
+    )}>
+    <options.icon class="size-5" />
+    {options.label}
+  </a>
+{/snippet}
+
+{#snippet internalMenuItem(options: Omit<MenuItem, 'renderer'>)}
+  <a
+    href={options.href}
     onclick={options.onclick}
     class={cn(
       'flex items-center justify-start gap-2 border-b-2 p-2 px-3 hover:bg-muted',

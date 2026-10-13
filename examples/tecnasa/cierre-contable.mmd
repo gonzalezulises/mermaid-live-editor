@@ -1,0 +1,20 @@
+gantt
+    title Proceso de Cierre Contable Mensual
+    dateFormat YYYY-MM-DD
+    
+    section Recopilación
+    Recopilar facturas           :a1, 2026-01-01, 3d
+    Verificar documentación      :a2, after a1, 2d
+    
+    section Conciliación
+    Conciliación bancaria        :b1, after a2, 2d
+    Conciliación de cuentas      :b2, after b1, 2d
+    
+    section Ajustes
+    Registrar ajustes            :c1, after b2, 1d
+    Revisar asientos contables   :c2, after c1, 1d
+    
+    section Reportes
+    Generar estados financieros  :d1, after c2, 2d
+    Revisión final del Contador  :d2, after d1, 1d
+    Aprobación de Gerencia       :milestone, after d2, 0d

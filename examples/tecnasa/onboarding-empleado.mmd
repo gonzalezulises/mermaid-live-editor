@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant RH as Recursos Humanos
+    participant IT as Sistemas
+    participant SUP as Supervisor
+    participant EMP as Nuevo Empleado
+
+    RH->>IT: Solicitar creación de cuentas
+    IT->>IT: Crear usuario y email
+    IT->>EMP: Enviar credenciales
+    
+    RH->>SUP: Notificar inicio de empleado
+    SUP->>EMP: Dar bienvenida
+    
+    par Capacitaciones
+        RH->>EMP: Inducción corporativa
+    and
+        SUP->>EMP: Entrenamiento del puesto
+    end
+    
+    EMP->>RH: Confirmar finalización de onboarding
+    RH->>RH: Actualizar registro de empleado
