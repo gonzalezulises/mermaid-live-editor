@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm build",
+  "outputDirectory": "docs",
+  "framework": null,
+  "installCommand": "corepack enable pnpm && pnpm install"
+}
